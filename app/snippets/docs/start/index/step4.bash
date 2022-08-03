@@ -5,7 +5,7 @@ DATA="CREATE author:john SET
 	age = 29,
 	admin = true,
 	signup_at = time::now();"
-curl -k -L -s --compressed POST \
+curl -s POST \
 	--header "Content-Type: application/json" \
 	--header "NS: test" \
 	--header "DB: test" \

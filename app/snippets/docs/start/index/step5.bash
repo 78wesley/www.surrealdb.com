@@ -4,7 +4,7 @@ DATA="CREATE article SET
 	title = \"Lorem ipsum dolor\",
 	text = \"Donec eleifend, nunc vitae commodo accumsan, mauris est fringilla.\",
 	account = (SELECT id FROM account WHERE name = \"ACME Inc\" LIMIT 1);"
-curl -k -L -s --compressed POST \
+curl -s POST \
 	--header "Content-Type: application/json" \
 	--header "NS: test" \
 	--header "DB: test" \

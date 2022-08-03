@@ -1,5 +1,5 @@
 DATA="SELECT * FROM article, account;"
-curl -k -L -s --compressed POST \
+curl -s POST \
 	--header "Content-Type: application/json" \
 	--header "NS: test" \
 	--header "DB: test" \
