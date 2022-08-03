@@ -105,6 +105,51 @@
 <Layout::Gap small />
 
 <Layout::Text text-l text-f>
+
+	<h3>Starting a multi-node distributed database with persistence storage</h3>
+
+	<p>same steps as above, but to run it with persistence you can give it a persistent cluster tag name <Ascua::Prism::Inline @language="bash" @code="--tag surrealdb-kv" /> on run TiKV command</p>
+
+	<Code @name="docs-start-starting-step10.shell">
+		user@localhost % tiup playground --tag surrealdb-kv --mode tikv-slim --pd 3 --kv 3
+		Using the version v6.1.0 for version constraint "".
+
+		If you'd like to use a TiDB version other than v6.1.0, cancel and retry with the following arguments:
+			Specify version manually:   tiup playground version
+			Specify version range:      tiup playground ^5
+			The nightly version:        tiup playground nightly
+
+		Playground Bootstrapping...
+		Start pd instance:v6.1.0
+		Start pd instance:v6.1.0
+		Start pd instance:v6.1.0
+		Start tikv instance:v6.1.0
+		Start tikv instance:v6.1.0
+		Start tikv instance:v6.1.0
+		PD client endpoints: [127.0.0.1:2379 127.0.0.1:2382 127.0.0.1:2384]
+		To view the Prometheus: http://127.0.0.1:9090
+		To view the Grafana: http://127.0.0.1:3000
+	</Code>
+
+	<p>Once TiKV is up and running, we can start a SurrealDB server instance, specifying the TiKV cluster endpoint as the backing data store.</p>
+
+	<Code @name="docs-start-starting-step11.shell">
+		user@localhost % surreal start --log trace --user root --pass root tikv://127.0.0.1:2379
+		[2022-08-03 14:55:54] INFO  surrealdb::iam Root authentication is enabled
+		[2022-08-03 14:55:54] INFO  surrealdb::dbs Database strict mode is disabled
+		[2022-08-03 14:55:54] INFO  surrealdb::kvs Connecting to kvs store at tikv://127.0.0.1:2379
+		[2022-08-03 14:55:54] INFO  surrealdb::kvs Connected to kvs store at tikv://127.0.0.1:2379
+		[2022-08-03 14:55:54] INFO  surrealdb::net Starting web server on 0.0.0.0:8000
+		[2022-08-03 14:55:54] INFO  surrealdb::net Started web server on 0.0.0.0:8000
+	</Code>
+
+	<p>TiKV data will be stored in <Ascua::Prism::Inline @language="bash" @code="/home/tobie/.tiup/data/surrealdb-kv" />, macos in <Ascua::Prism::Inline @language="bash" @code="/Users/tobie/.tiup/data/surrealdb-kv" /></p>
+
+</Layout::Text>
+
+<Layout::Gap small />
+
+<Layout::Text text-l text-f>
 	<h3>Next steps</h3>
 	<p>Congratulations, you’ve now successfully started SurrealDB! You are now ready to start inserting data and performing queries against SurrealDB. Take a look at the next chapter to get started with querying SurrealDB.</p>
 </Layout::Text>
